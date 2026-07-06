@@ -1,0 +1,239 @@
+:root {
+    --bg-dark: #070b12;
+    --panel-bg: #0f172a;
+    --accent-blue: #2563eb;
+    --accent-glow: #60a5fa;
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --border-color: #1e293b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    background: radial-gradient(circle at top center, #111827 0%, var(--bg-dark) 100%); 
+    color: var(--text-main); 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* Header Leiste */
+.terminal-header {
+    width: 100%;
+    background: #020617;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+.header-title {
+    font-family: monospace;
+    color: var(--success);
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+}
+
+/* Buttons */
+.notes-toggle-btn {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--accent-glow);
+    border: 1px solid var(--accent-blue);
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+.notes-toggle-btn:hover {
+    background: var(--accent-blue);
+    color: white;
+}
+
+/* Container */
+.container { 
+    width: 100%;
+    max-width: 780px; 
+    padding: 40px 20px; 
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.terminal-brand h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(to right, #ffffff, var(--accent-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+/* Suchmaske */
+.search-wrapper { 
+    display: flex; 
+    gap: 12px; 
+}
+input { 
+    flex: 1; 
+    background: #020617; 
+    border: 1px solid var(--border-color); 
+    color: white; 
+    padding: 14px 18px; 
+    border-radius: 6px; 
+    font-size: 1rem;
+    outline: none;
+}
+input:focus { 
+    border-color: var(--accent-blue); 
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+.scan-btn { 
+    background: var(--accent-blue); 
+    border: none; 
+    color: white; 
+    padding: 0 24px; 
+    border-radius: 6px; 
+    font-weight: bold; 
+    cursor: pointer;
+}
+.scan-btn:hover { background: #1d4ed8; }
+
+/* Status Leerzustand */
+.status-placeholder {
+    text-align: center;
+    padding: 50px;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    color: var(--text-dim);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* Sidebar (Notizblock Fix) */
+.sidebar {
+    height: 100%; 
+    width: 320px; 
+    position: fixed; 
+    z-index: 2000; 
+    top: 0; 
+    left: -320px;
+    background: var(--panel-bg); 
+    border-right: 1px solid var(--border-color); 
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    display: flex;
+    flex-direction: column;
+}
+.sidebar.open { 
+    transform: translateX(320px);
+}
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sidebar-header h3 { font-size: 0.9rem; color: var(--accent-glow); font-family: monospace; }
+.close-btn { background: transparent; border: none; color: var(--danger); font-size: 1.2rem; cursor: pointer; font-weight: bold; }
+#notesArea { 
+    flex: 1; 
+    background: #020617; 
+    color: #e5e7eb; 
+    border: none; 
+    padding: 20px; 
+    font-size: 0.95rem; 
+    resize: none; 
+    outline: none; 
+    font-family: monospace;
+    line-height: 1.5;
+}
+
+/* Einsatzergebnis-Karte */
+.result-card { 
+    background: var(--panel-bg); 
+    padding: 30px; 
+    border-radius: 8px; 
+    border-left: 5px solid var(--accent-blue); 
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+.card-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+.card-title-main { font-size: 1.3rem; font-weight: 700; color: white; }
+.info-trigger-btn {
+    background: #1e293b;
+    color: var(--warning);
+    border: 1px solid #334155;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+.info-trigger-btn:hover { background: #334155; }
+
+.label { 
+    color: var(--accent-glow); 
+    font-size: 0.7rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    margin-top: 18px; 
+    display: block; 
+    letter-spacing: 1px;
+}
+.value { font-size: 1rem; color: var(--text-main); margin-top: 4px; line-height: 1.5; }
+.fragen-liste { font-size: 0.95rem; color: #cbd5e1; padding-left: 20px; margin-top: 6px; }
+.fragen-liste li { margin-bottom: 4px; }
+
+/* Modal */
+.modal-overlay { 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(2, 6, 23, 0.85); 
+    backdrop-filter: blur(4px);
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 3000; 
+}
+.modal-content { 
+    background: var(--panel-bg); 
+    width: 90%;
+    max-width: 650px;
+    border-radius: 8px; 
+    border: 1px solid var(--border-color); 
+    display: flex;
+    flex-direction: column;
+}
+.modal-header { padding: 20px; border-bottom: 1px solid var(--border-color); }
+.modal-header h2 { font-size: 1.1rem; color: var(--warning); font-family: monospace; }
+.modal-body { padding: 25px; max-height: 400px; overflow-y: auto; color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; }
+.modal-footer { padding: 15px; border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end; }
+.close-modal-btn { background: var(--accent-blue); border: none; color: white; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+

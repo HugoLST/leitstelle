@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitstelle / ELR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="terminal-header">
+        <div class="header-title">⚡ ELR HAMBURG // POLIZEI & FEUERWEHR //</div>
+        <button class="notes-toggle-btn" onclick="toggleNotes()">📋 NOTIZEN (F4)</button>
+    </header>
+
+    <div id="notesSidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>📝 LAUFENDE NOTIZEN</h3>
+            <button onclick="toggleNotes()" class="close-btn">X</button>
+        </div>
+        <textarea id="notesArea" placeholder="Hier Kennzeichen, Personalien, Funkrufnamen oder Standort-Details eintragen..."></textarea>
+    </div>
+
+    <main class="container">
+        <div class="terminal-brand">
+            <h1>Leitstelle Hamburg / 110 & 112</h1>
+            <p class="subtitle">Bundesland Hamburg — Abfrage über Klartext-Stichwort oder Funkabkürzung.</p>
+        </div>
+
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Stichwort oder Kürzel eingeben (z.B. vu p, hg, ams, brand, we)..." autofocus>
+            <button onclick="searchStichwort()" class="scan-btn">SUCHEN [ENTER]</button>
+        </div>
+
+        <div id="result">
+            <div class="status-placeholder"> Erwarte Stichwort / Einsatz Stichwort</div>
+        </div>
+    </main>
+
+    <div id="infoModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Anweisung / Information</h2>
+            </div>
+            <div class="modal-body">
+                <p id="modalText"></p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal()" class="close-modal-btn">BRIEFING SCHLIESSEN</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
