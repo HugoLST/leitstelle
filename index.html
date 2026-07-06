@@ -10,7 +10,10 @@
 
     <header class="terminal-header">
         <div class="header-title">⚡ ELR HAMBURG // POLIZEI & FEUERWEHR //</div>
-        <button class="notes-toggle-btn" onclick="toggleNotes()">📋 NOTIZEN (F4)</button>
+        <div class="header-controls">
+            <button class="info-btn" onclick="openModal()">ℹ️ INFO</button>
+            <button class="notes-toggle-btn" onclick="toggleNotes()">📋 NOTIZEN (F4)</button>
+        </div>
     </header>
 
     <div id="notesSidebar" class="sidebar">
@@ -37,20 +40,40 @@
         </div>
     </main>
 
+    <!-- Info/Einsatz Modal -->
     <div id="infoModal" class="modal-overlay" style="display:none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle">Anweisung / Information</h2>
+                <h2 id="modalTitle">System-Informationen</h2>
             </div>
             <div class="modal-body">
                 <p id="modalText"></p>
+                <div class="feedback-section" style="margin-top:20px; border-top:1px solid #1e293b; padding-top:15px;">
+                    <p>System bewerten:</p>
+                    <div class="stars" id="star-rating">
+                        <div class="stars" id="star-rating">
+                            <!-- Im infoModal innerhalb des modal-body -->
+                        <div class="feedback-section" style="margin-top: 20px; border-top: 1px solid #1e293b; padding-top: 15px;">
+                            <p>System bewerten:</p>
+                            <!-- Sterne in umgekehrter HTML-Reihenfolge für den Hover-Effekt -->
+                            <div class="stars" id="star-rating">
+                                <span onclick="sendFeedback(5)">★</span>
+                                <span onclick="sendFeedback(4)">★</span>
+                                <span onclick="sendFeedback(3)">★</span>
+                                <span onclick="sendFeedback(2)">★</span>
+                                <span onclick="sendFeedback(1)">★</span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button onclick="closeModal()" class="close-modal-btn">BRIEFING SCHLIESSEN</button>
+                <button onclick="closeModal()" class="close-modal">SCHLIEẞEN</button>
             </div>
         </div>
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
