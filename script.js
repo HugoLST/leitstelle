@@ -972,19 +972,39 @@ function closeModal() {
     document.getElementById('infoModal').style.display = "none";
 }
 
+// ... (bestehender Code oben bleibt unverändert)
+
 function sendFeedback(stars) {
-    const webhookUrl = 'https://discord.com/api/webhooks/1523748385838989374/z7Qy1MuMJFzV2qu2oVtpFODPzC_x7lrY40P0zLOtEUVEl807jA24YZnvvUOs-vox9WDl'; // Bitte hier deine URL eintragen
+    const webhookUrl = 'https://discord.com/api/webhooks/1523748385838989374/z7Qy1MuMJFzV2qu2oVtpFODPzC_x7lrY40P0zLOtEUVEl807jA24YZnvvUOs-vox9WDl';
     
+    // Prüfen, ob ein Einsatz aktiv ist. Wenn nicht, nutzen wir einen neutralen Wert.
+    let einsatzName = (typeof currentMatchData !== 'undefined' && currentMatchData && currentMatchData.stichwort) 
+                     ? currentMatchData.stichwort 
+                     : null;
+    
+    // Nachricht anpassen: Nur wenn ein Einsatz aktiv ist, erscheint er in der Nachricht
+    let messageContent;
+    if (einsatzName) {
+        messageContent = `⭐ Einsatz **${einsatzName}** wurde mit **${stars} Sternen** bewertet.`;
+    } else {
+        messageContent = `⭐ System wurde allgemein mit **${stars} Sternen** bewertet.`;
+    }
+
     fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            content: `⭐ Bewertung erhalten: ${stars} Sterne` 
+        body: JSON.stringify({
+            content: messageContent
         })
     })
-    .then(() => alert("Danke für deine " + stars + "-Sterne Bewertung! 💝"))
+    .then(() => {
+        alert("Danke für deine Bewertung!");
+        closeModal();
+    })
     .catch(err => console.error("Fehler beim Senden:", err));
 }
+
+
 
 // Globaler Key-Listener für Enter (Suche) und F4 (Notizen)
 document.addEventListener('keydown', function(event) {
