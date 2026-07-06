@@ -237,3 +237,83 @@ input:focus {
 .modal-footer { padding: 15px; border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end; }
 .close-modal-btn { background: var(--accent-blue); border: none; color: white; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; }
 
+.header-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+/* Styling für den neuen Info-Button */
+.info-btn {
+    background-color: transparent;
+    border: 1px solid #3a86ff;
+    color: #3a86ff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+.info-btn:hover {
+    background-color: #3a86ff;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(58, 134, 255, 0.5);
+
+}
+
+
+
+.info-btn {
+    background: transparent;
+    border: 1px solid #3a86ff;
+    color: #3a86ff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.info-btn:hover { background: #3a86ff; color: #fff; }
+
+/* Styling für die Sterne */
+.stars {
+    display: flex;
+    flex-direction: row-reverse; /* Damit der 5. Stern ganz rechts ist */
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #475569; /* Dunkles Grau für inaktive Sterne */
+    transition: all 0.2s ease;
+}
+
+/* Hover-Effekt: Vergrößerung und Goldfarbe */
+.stars span {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.stars span:hover, 
+.stars span:hover ~ span {
+    color: #fbbf24;      /* Gold-Farbe */
+    transform: scale(1.4); /* Sterne werden größer */
+}
+
+.close-modal {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-dim);
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.close-modal:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+    background: rgba(239, 68, 68, 0.05);
+}
