@@ -906,15 +906,23 @@ function searchStichwort() {
         let fragenHtml = bestMatch.fragen.map(f => `<li>📌 ${f}</li>`).join('');
 
         // Baut das HTML-Gerüst auf, lässt die Werte für den Effekt aber leer
+        // ... innerhalb der searchStichwort Funktion ...
+
         resultDiv.innerHTML = `
             <div class="result-card">
                 <div class="card-header-wrapper">
                     <div class="card-title-main" id="typeStichwort"></div>
-                    <button class="info-trigger-btn" onclick="openModal()">📜 DIENSTANWEISUNG</button>
+                    <div class="header-buttons">
+                        <!-- NEUER INFO BUTTON -->
+                        <button class="info-trigger-btn" onclick="openModal()" style="margin-right:5px;">ℹ️ INFO</button>
+                        <button class="info-trigger-btn" onclick="openModal()">📜 DIENSTANWEISUNG</button>
+                    </div>
                 </div>
                 
                 <span class="label">🚨 Primäre Einsatzmittel (Dispo)</span>
                 <div class="value" id="typeEinheiten" style="color: var(--warning); font-weight: bold; font-family: monospace;"></div>
+                
+                <!-- ... Rest bleibt identisch ... -->
                 
                 <span class="label">📞 Taktische Abfragekriterien (Checkliste)</span>
                 <ul class="fragen-liste">${fragenHtml}</ul>
@@ -946,17 +954,36 @@ function searchStichwort() {
     }
 }
 
-// Modal Logik für das ausführliche Briefing
 function openModal() {
-    if (!currentMatchData) return;
     const modal = document.getElementById('infoModal');
-    document.getElementById('modalTitle').innerText = "Einweisung / Aufgaben: " + currentMatchData.stichwort.toUpperCase();
-    document.getElementById('modalText').innerHTML = currentMatchData.ausfuehrlich.replace(/\n/g, '<br>');
+    // Wenn ein Einsatz aktiv ist, zeigen wir Einsatz-Infos, sonst allgemeine Infos
+    if (typeof currentMatchData !== 'undefined' && currentMatchData) {
+        document.getElementById('modalTitle').innerText = "Info: " + currentMatchData.stichwort.toUpperCase();
+        document.getElementById('modalText').innerHTML = currentMatchData.ausfuehrlich.replace(/\n/g, '<br>');
+    } else {
+        document.getElementById('modalTitle').innerText = "Leitstelle Hamburg: Information";
+        document.getElementById('modalText').innerHTML = "Erstellt von: @Hugo Schumacher | Polizeioberkommisar<br><br>Discord: @nowayimending<br><br> Ich würde mich auf einen Feedback vom Projekt sehr Freuen! ";
+    }
     modal.style.display = "flex";
 }
 
+
 function closeModal() {
     document.getElementById('infoModal').style.display = "none";
+}
+
+function sendFeedback(stars) {
+    const webhookUrl = 'https://discord.com/api/webhooks/1523748385838989374/z7Qy1MuMJFzV2qu2oVtpFODPzC_x7lrY40P0zLOtEUVEl807jA24YZnvvUOs-vox9WDl'; // Bitte hier deine URL eintragen
+    
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            content: `⭐ Bewertung erhalten: ${stars} Sterne` 
+        })
+    })
+    .then(() => alert("Danke für deine " + stars + "-Sterne Bewertung! 💝"))
+    .catch(err => console.error("Fehler beim Senden:", err));
 }
 
 // Globaler Key-Listener für Enter (Suche) und F4 (Notizen)
